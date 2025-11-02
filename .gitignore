@@ -1,0 +1,23 @@
+# Executáveis
+*.exe
+*.out
+*.app
+
+# Arquivos de objeto
+*.o
+*.obj
+
+# Arquivos de biblioteca
+*.lib
+*.a
+
+# Arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos do VS Code
+.vscode/
+
+# Arquivos de backup
+*.bak
+*~
