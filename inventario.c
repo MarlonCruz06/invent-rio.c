@@ -3,20 +3,20 @@
 #include <stdlib.h>
 
 // Definição da struct Item para armazenar dados dos itens
-struct Item {
+typedef struct {
     char nome[30];
     char tipo[20];
     int quantidade;
-};
+} Item;
 
 // Vetor global para armazenar até 10 itens
-struct Item mochila[10];
+Item mochila[10];
 int totalItens = 0;
 
 // Função para inserir um novo item na mochila
 void inserirItem() {
     if (totalItens >= 10) {
-        printf("Mochila cheia! Não é possível adicionar mais itens.\n");
+        printf("Mochila cheia! Nao e possivel adicionar mais itens.\n");
         return;
     }
     
@@ -57,7 +57,7 @@ void removerItem() {
         totalItens--;
         printf("Item removido com sucesso!\n\n");
     } else {
-        printf("Item não encontrado!\n\n");
+        printf("Item nao encontrado!\n\n");
     }
 }
 
@@ -72,7 +72,6 @@ void listarItens() {
         printf("%-24s | %-18s | %d\n", mochila[i].nome, mochila[i].tipo, mochila[i].quantidade);
         printf("-----------------------------------------------------------\n");
     }
-    printf("\n");
 }
 
 // Função para buscar um item específico pelo nome
@@ -97,13 +96,12 @@ void buscarItem() {
         printf("Tipo: %s\n", mochila[encontrado].tipo);
         printf("Quantidade: %d\n\n", mochila[encontrado].quantidade);
     } else {
-        printf("Item não encontrado!\n\n");
+        printf("Item nao encontrado!\n\n");
     }
 }
 
 int main() {
     int opcao;
-    char buffer[100];
     
     // Adiciona um item inicial para demonstração (como mostrado na imagem)
     strcpy(mochila[0].nome, "KitMedico");
@@ -111,12 +109,12 @@ int main() {
     mochila[0].quantidade = 3;
     totalItens = 1;
     
-    while (1) {
+    do {
         // Lista os itens atuais
         listarItens();
         
-        printf("Pressione Enter para continuar...\n");
-        fgets(buffer, sizeof(buffer), stdin);
+        printf("\nPressione Enter para continuar...\n");
+        getchar();
         
         printf("=======================================\n");
         printf("    MOCHILA DE SOBREVIVENCIA - CODIGO DA ILHA\n");
@@ -130,11 +128,7 @@ int main() {
         printf("-------------------------------------------\n");
         printf("Escolha uma opcao: ");
         
-        if (scanf("%d", &opcao) != 1) {
-            // Limpa o buffer em caso de entrada inválida
-            while (getchar() != '\n');
-            opcao = -1;
-        }
+        scanf("%d", &opcao);
         
         switch (opcao) {
             case 1:
@@ -145,15 +139,15 @@ int main() {
                 break;
             case 3:
                 listarItens();
+                printf("\n");
                 break;
             case 0:
                 printf("Saindo do sistema...\n");
-                exit(0);
                 break;
             default:
                 printf("Opcao invalida! Tente novamente.\n\n");
         }
-    }
+    } while (opcao != 0);
     
     return 0;
 }
